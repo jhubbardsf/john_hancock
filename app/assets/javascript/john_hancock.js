@@ -13,7 +13,7 @@ $( document ).ready(function() {
 
   $(parent_form).submit(function(e) {
     for(var i = 0; i < hidden_fields.length; i++) {
-      $(hidden_fields[i]).val(signaturePads[i]toDataURL());
+      $(hidden_fields[i]).val(signaturePads[i].toDataURL());
     }
   });
 
