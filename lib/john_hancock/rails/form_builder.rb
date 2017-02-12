@@ -4,11 +4,11 @@ module JohnHancock
       include ActionView::Helpers::TagHelper
 
       def signature_canvas
-        content_tag(:canvas, nil, id: 'JohnHancock-canvas')
+        content_tag(:canvas, nil, id: 'JohnHancock-canvas', class: 'JohnHancock-canvas')
       end
 
       def hidden_signature_field(attribute)
-        hidden_field(attribute.to_sym, id: 'JohnHancock-hidden')
+        hidden_field(attribute.to_sym, id: 'JohnHancock-hidden', class: 'JohnHancock-hidden')
       end
 
       def signature_field(attribute)

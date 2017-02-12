@@ -1,26 +1,32 @@
 //= require signature_pad
 $( document ).ready(function() {
-  if(document.getElementById("JohnHancock-canvas")){
-    var canvas = document.getElementById("JohnHancock-canvas"),
-        hidden_field = document.getElementById("JohnHancock-hidden"),
-        parent_form = $(canvas).closest("form"),
-        signaturePad;
+  var canvases = document.getElementsByClassName("JohnHancock-canvas");
+  var hidden_fields = document.getElementsByClassName("JohnHancock-hidden");
+  var signaturePads = []
+  for(var i = 0; i < canvases.length; i++) {
+    var canvas = canvases[i];
+    var hidden_field = hidden_fields[i];
+    var parent_form = $(canvas).closest("form");
+    signaturePads.push(new SignaturePad(canvas));
 
-    signaturePad = new SignaturePad(canvas);
-
-    $(parent_form).submit(function(e) {
-      $(hidden_field).val(signaturePad.toDataURL());
-    });
-
-    function resizeCanvas() {
-      var ratio =  Math.max(window.devicePixelRatio || 1, 1);
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = canvas.offsetHeight * ratio;
-      canvas.getContext("2d").scale(ratio, ratio);
-      signaturePad.clear();
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
   }
+
+  $(parent_form).submit(function(e) {
+    for(var i = 0; i < hidden_fields.length; i++) {
+      $(hidden_fields[i]).val(signaturePads[i]toDataURL());
+    }
+  });
+
+  function resizeCanvas() {
+    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+    for(var i = 0; i < canvases.length; i++) {
+        canvases[i].width = canvases[i].offsetWidth * ratio;
+        canvases[i].height = canvases[i].offsetHeight * ratio;
+        canvases[i].getContext("2d").scale(ratio, ratio);
+        signaturePads[i].clear(); // otherwise isEmpty() might return incorrect value
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 })
