@@ -11,6 +11,11 @@ module JohnHancock
         hidden_field(attribute.to_sym, id: 'JohnHancock-hidden', class: 'JohnHancock-hidden')
       end
 
+      def clear_field
+
+      end
+
+
       def signature_field(attribute)
         tags = []
         tags << signature_canvas
